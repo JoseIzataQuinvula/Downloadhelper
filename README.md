@@ -1,20 +1,76 @@
-# ⚡ DownloadHelper: Gerenciador de Downloads YouTube
+Markdown
 
-## 🎯 Resumo do Projeto
+# DownloadHelper - YouTube Download Manager
 
-**DownloadHelper é uma ferramenta de código aberto para baixar e gerenciar vídeos/playlists do YouTube. Ele oferece gestão de download retomável (pausa/continuação) e um status de arquivo no disco totalmente preciso.**
+Este repositório contém o código-fonte do DownloadHelper, uma ferramenta de código aberto desenvolvida em Python para o gerenciamento avançado de downloads do YouTube. O projeto foca em precisão de status de arquivos e suporte a operações retomáveis (pausa/continuação).
+
+## Visão Geral
+
+O DownloadHelper foi projetado para oferecer uma interface de gestão de downloads estável. A lógica principal permite o processamento de vídeos individuais e playlists, garantindo integridade de dados através da sincronização com os binários do FFmpeg e um sistema de monitoramento de disco em tempo real.
 
 ---
 
-## 🛠️ Estrutura e Distribuição
+## Arquitetura de Pastas
 
-A aplicação Python (`download_helper.py`) e suas dependências (`requirements.txt`) exigem que os binários do FFmpeg e recursos visuais (`assets/icon.png`) estejam presentes na raiz.
+A organização do diretório segue o padrão de distribuição para executáveis Python:
 
-A distribuição final é um executável único (`DownloadHelper.exe` ou similar), gerado via PyInstaller, que **empacota todos os arquivos necessários** (incluindo a pasta `ffmpeg`) para garantir que o usuário final só precise do arquivo principal da pasta `dist`.
+* **Raiz:** Ponto de entrada (`download_helper.py`), dependências (`requirements.txt`) e configuração de build.
+* **ffmpeg/:** Binários obrigatórios (`ffmpeg.exe`, `ffprobe.exe`) para muxing e conversão de mídia.
+* **assets/:** Recursos visuais e identidade gráfica (`icon.png`).
+* **dist/:** (Gerado) Contém o executável final empacotado para o usuário.
 
-| Caminho Essencial | Propósito |
-| :--- | :--- |
-| `download_helper.py` | Ponto de entrada e lógica principal. |
-| `requirements.txt` | Lista de bibliotecas Python. |
-| `ffmpeg/` | Binários obrigatórios (ffmpeg, ffprobe) para processamento de vídeo. |
-| `assets/` | Recursos gráficos (ícone). |
+---
+
+## Especificações Técnicas
+
+O desenvolvimento priorizou a portabilidade e a automação de processos de mídia:
+
+* **Linguagem:** Python 3.x com processamento assíncrono para UI e downloads.
+* **Dependências:** Gerenciadas via `requirements.txt` (incluindo `yt-dlp` ou similar).
+* **Processamento de Mídia:** Integração nativa com FFmpeg para alta fidelidade de áudio e vídeo.
+* **Distribuição:** Compilação via PyInstaller para geração de executável único (Self-contained).
+
+---
+
+## Demonstração da Interface
+
+### Interface Principal
+![Visualização da Interface](./assets/preview.png)
+
+---
+
+## Procedimentos de Instalação e Uso
+
+Para configurar o ambiente de desenvolvimento localmente:
+
+1. **Clone o repositório:**
+```bash
+git clone [https://github.com/JoseIzataQuinvula/download-helper.git](https://github.com/JoseIzataQuinvula/download-helper.git)
+cd download-helper
+Instale as dependências:
+
+Bash
+
+pip install -r requirements.txt
+Execução: Certifique-se de que os binários do FFmpeg estão na pasta raiz e execute:
+
+Bash
+
+python download_helper.py
+Build de Distribuição
+Para gerar o executável final para Windows:
+
+Bash
+
+pyinstaller --onefile --noconsole --add-data "assets;assets" --add-data "ffmpeg;ffmpeg" --icon=assets/icon.png download_helper.py
+
+---
+
+### Tópicos Sugeridos para o GitHub
+Para este projeto, use estas tags para atrair o público certo:
+
+`python` `youtube-downloader` `ffmpeg` `pyinstaller` `gui` `open-source` `download-manager` `clean-code` `jose-izata-quivula` `angola-tech`
+
+
+
+**Precisa que eu ajude com a lógica do comando PyInstaller ou quer passar para o ajuste de outro projeto?**
