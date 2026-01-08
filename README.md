@@ -1,5 +1,3 @@
-Markdown
-
 # DownloadHelper - YouTube Download Manager
 
 Este repositório contém o código-fonte do DownloadHelper, uma ferramenta de código aberto desenvolvida em Python para o gerenciamento avançado de downloads do YouTube. O projeto foca em precisão de status de arquivos e suporte a operações retomáveis (pausa/continuação).
@@ -12,7 +10,7 @@ O DownloadHelper foi projetado para oferecer uma interface de gestão de downloa
 
 ## Arquitetura de Pastas
 
-A organização do diretório segue o padrão de distribuição para executáveis Python:
+A organização do diretório segue o padrão de separação de responsabilidades:
 
 * **Raiz:** Ponto de entrada (`download_helper.py`), dependências (`requirements.txt`) e configuração de build.
 * **ffmpeg/:** Binários obrigatórios (`ffmpeg.exe`, `ffprobe.exe`) para muxing e conversão de mídia.
@@ -26,15 +24,16 @@ A organização do diretório segue o padrão de distribuição para executávei
 O desenvolvimento priorizou a portabilidade e a automação de processos de mídia:
 
 * **Linguagem:** Python 3.x com processamento assíncrono para UI e downloads.
-* **Dependências:** Gerenciadas via `requirements.txt` (incluindo `yt-dlp` ou similar).
+* **Dependências:** Gerenciadas via `requirements.txt`.
 * **Processamento de Mídia:** Integração nativa com FFmpeg para alta fidelidade de áudio e vídeo.
-* **Distribuição:** Compilação via PyInstaller para geração de executável único (Self-contained).
+* **Distribuição:** Compilação via PyInstaller para geração de executável único.
 
 ---
 
 ## Demonstração da Interface
 
 ### Interface Principal
+
 ![Visualização da Interface](./assets/preview.png)
 
 ---
@@ -44,6 +43,7 @@ O desenvolvimento priorizou a portabilidade e a automação de processos de míd
 Para configurar o ambiente de desenvolvimento localmente:
 
 1. **Clone o repositório:**
+
 ```bash
 git clone [https://github.com/JoseIzataQuinvula/download-helper.git](https://github.com/JoseIzataQuinvula/download-helper.git)
 cd download-helper
@@ -52,7 +52,9 @@ Instale as dependências:
 Bash
 
 pip install -r requirements.txt
-Execução: Certifique-se de que os binários do FFmpeg estão na pasta raiz e execute:
+Execução:
+
+Certifique-se de que os binários do FFmpeg estão na pasta raiz e execute:
 
 Bash
 
@@ -65,12 +67,3 @@ Bash
 pyinstaller --onefile --noconsole --add-data "assets;assets" --add-data "ffmpeg;ffmpeg" --icon=assets/icon.png download_helper.py
 
 ---
-
-### Tópicos Sugeridos para o GitHub
-Para este projeto, use estas tags para atrair o público certo:
-
-`python` `youtube-downloader` `ffmpeg` `pyinstaller` `gui` `open-source` `download-manager` `clean-code` `jose-izata-quivula` `angola-tech`
-
-
-
-**Precisa que eu ajude com a lógica do comando PyInstaller ou quer passar para o ajuste de outro projeto?**
