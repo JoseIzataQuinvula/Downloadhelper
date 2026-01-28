@@ -1,0 +1,91 @@
+<MainScreen>:
+    orientation: 'vertical'
+    canvas.before:
+        Color:
+            rgba: 0.07, 0.07, 0.07, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+
+    # --- 1. CABEÇALHO ---
+    BoxLayout:
+        size_hint_y: None
+        height: '80dp'
+        padding: ['25dp', '20dp', '25dp', '0dp']
+        Label:
+            text: "DOWNLOAD HELPER"
+            font_size: '26sp'
+            bold: True
+            color: 0.37, 0.64, 0.88, 1
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+
+    # --- 2. ÁREA DE ENTRADA ---
+    BoxLayout:
+        size_hint_y: None
+        height: '70dp'
+        padding: ['20dp', '10dp', '20dp', '10dp']
+        spacing: '10dp'
+
+        TextInput:
+            id: url_input
+            hint_text: "Cole o link do YouTube aqui..."
+            multiline: False
+            font_size: '16sp'
+            padding_y: [self.height / 2.0 - (self.line_height / 2.0), 0] 
+            background_normal: '' 
+            background_color: 0.15, 0.15, 0.15, 1
+            foreground_color: 1, 1, 1, 1
+            cursor_color: 0.37, 0.64, 0.88, 1
+            on_text_validate: root.handle_search()
+
+        Button:
+            text: "ANALISAR" if not root.is_analyzing else "AGUARDE..."
+            size_hint_x: None
+            width: '140dp'
+            bold: True
+            background_normal: '' 
+            background_color: (0.12, 0.32, 0.55, 1) if not root.is_analyzing else (0.3, 0.3, 0.3, 1)
+            disabled: root.is_analyzing
+            on_release: root.handle_search()
+
+    # --- 3. STATUS LOG ---
+    BoxLayout:
+        size_hint_y: None
+        height: '35dp'
+        padding: ['25dp', 0]
+        Label:
+            text: root.status_text
+            color: root.status_color
+            font_size: '13sp'
+            italic: True
+            halign: 'left'
+            valign: 'middle'
+            text_size: self.size
+
+    # --- 4. LISTA DE CARDS ---
+    BoxLayout: 
+        padding: ['10dp', '0dp', '10dp', '10dp']
+        ScrollView:
+            id: scroll_view
+            do_scroll_x: False
+            bar_width: '6dp'
+            bar_color: 0.37, 0.64, 0.88, 0.8
+            scroll_type: ['bars', 'content']
+            
+            canvas.before:
+                Color:
+                    rgba: 0.1, 0.1, 0.1, 1
+                RoundedRectangle:
+                    pos: self.pos
+                    size: self.size
+                    radius: [10,]
+
+            GridLayout:
+                id: container
+                cols: 1
+                spacing: '12dp'
+                padding: ['15dp', '15dp', '15dp', '15dp']
+                size_hint_y: None
+                height: self.minimum_height

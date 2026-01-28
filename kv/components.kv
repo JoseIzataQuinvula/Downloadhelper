@@ -1,0 +1,88 @@
+<MediaBox>:
+    orientation: 'vertical'
+    size_hint_y: None
+    height: self.minimum_height
+    padding: '12dp'
+    spacing: '8dp'
+    
+    canvas.before:
+        Color:
+            rgba: 0.17, 0.17, 0.17, 1
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [6,]
+
+    BoxLayout:
+        orientation: 'horizontal'
+        spacing: '10dp' if self.minimum_width > 0 else 0
+        size_hint_y: None
+        height: '40dp'
+
+        # --- LADO ESQUERDO: TEXTOS ---
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_x: 1 
+            Label:
+                text: root.title
+                font_size: '14sp'
+                bold: True
+                halign: 'left'
+                valign: 'middle'
+                text_size: self.size
+                shorten: True
+            Label:
+                text: root.status_text
+                font_size: '11sp'
+                color: root.status_color
+                halign: 'left'
+                valign: 'top'
+                text_size: self.size
+
+        # --- LADO DIREITO: BOTÕES DINÂMICOS ---
+        BoxLayout:
+            size_hint_x: None
+            width: self.minimum_width
+            spacing: '6dp'
+
+            # Botão Pasta
+            Button:
+                text: "PASTA"
+                size_hint: None, None
+                size: ('65dp', '35dp') if (root.status_text.startswith('✓') or 'Parcial' in root.status_text) and root.progress_val == 0 else (0, 0)
+                opacity: 1 if self.width > 0 else 0
+                disabled: self.width == 0
+                background_normal: ''
+                background_color: 0.3, 0.3, 0.3, 1
+                on_release: if root.on_open_folder: root.on_open_folder()
+
+            # Botão Baixar / Continuar
+            Button:
+                text: "BAIXAR" if "Pronto" in root.status_text else "CONTINUAR"
+                size_hint: None, None
+                size: ('85dp', '35dp') if "Concluído" not in root.status_text and root.progress_val == 0 else (0, 0)
+                opacity: 1 if self.width > 0 else 0
+                disabled: self.width == 0
+                background_normal: ''
+                background_color: (0.12, 0.32, 0.55, 1)
+                on_release: if root.on_download: root.on_download()
+
+            # Botão Remover / Cancelar (Texto Completo)
+            Button:
+                text: "CANCELAR" if root.progress_val > 0 else "REMOVER"
+                size_hint: None, None
+                # Largura de 90dp para caber a palavra "CANCELAR"
+                size: ('90dp', '35dp')
+                background_normal: ''
+                background_color: (0.7, 0.1, 0.1, 1)
+                on_release: if root.on_remove: root.on_remove()
+
+    # --- BARRA DE PROGRESSO ---
+    BoxLayout:
+        size_hint_y: None
+        height: '12dp' if root.progress_val > 0 else 0
+        opacity: 1 if root.progress_val > 0 else 0
+        padding: [0, '4dp']
+        ProgressBar:
+            max: 1.0
+            value: root.progress_val

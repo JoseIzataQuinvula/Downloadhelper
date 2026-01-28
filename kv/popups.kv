@@ -1,0 +1,77 @@
+<QualitySelectorPopup>:
+    # Removemos o fundo e a linha padrão do Kivy para usar o nosso design arredondado
+    background: '' 
+    background_color: 0, 0, 0, 0
+    separator_height: 0
+    title_height: 0
+    size_hint: None, None
+    size: '420dp', '620dp'
+    auto_dismiss: True
+    
+    BoxLayout:
+        orientation: 'vertical'
+        padding: '20dp'
+        spacing: '15dp'
+        canvas.before:
+            Color:
+                rgba: 0.1, 0.1, 0.1, 1
+            RoundedRectangle:
+                pos: self.pos
+                size: self.size
+                radius: [15,]
+
+        # --- 1. CABEÇALHO ---
+        Image:
+            source: root.icon_src
+            size_hint: None, None
+            size: '60dp', '60dp'
+            pos_hint: {'center_x': 0.5}
+
+        Label:
+            text: "CONFIGURAR DOWNLOAD"
+            font_size: '18sp'
+            bold: True
+            size_hint_y: None
+            height: '30dp'
+            color: 0.37, 0.64, 0.88, 1
+
+        Label:
+            text: root.info_text
+            font_size: '11sp'
+            color: 0.6, 0.6, 0.6, 1
+            size_hint_y: None
+            height: '20dp'
+
+        # --- 2. LISTA DINÂMICA (SCROLL) ---
+        ScrollView:
+            do_scroll_x: False
+            bar_width: '4dp'
+            
+            GridLayout: # GridLayout é melhor que BoxLayout para listas dinâmicas com scroll
+                id: options_list
+                cols: 1
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: '10dp'
+                padding: [0, '10dp']
+
+        # --- 3. BOTÕES DE AÇÃO ---
+        BoxLayout:
+            size_hint_y: None
+            height: '45dp'
+            spacing: '10dp'
+
+            Button:
+                text: "VOLTAR"
+                size_hint_x: 0.4
+                background_normal: ''
+                background_color: 0.2, 0.2, 0.2, 1
+                on_release: root.dismiss()
+
+            Button:
+                text: "INICIAR DOWNLOAD"
+                size_hint_x: 0.6
+                bold: True
+                background_normal: ''
+                background_color: 0.12, 0.32, 0.55, 1
+                on_release: root.confirm()
