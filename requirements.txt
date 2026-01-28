@@ -1,0 +1,20 @@
+# --- Interface Gráfica (Kivy Framework) ---
+# Usamos >= para permitir que o pip busque a build compatível com Python 3.13
+kivy>=2.3.0
+kivy_deps.sdl2>=0.8.0
+kivy_deps.glew>=0.3.1
+Pillow>=10.2.0
+
+# --- Core e Downloads (Motores de Busca) ---
+yt-dlp>=2025.1.15
+requests>=2.32.3
+certifi>=2024.12.14
+
+# --- Utilitários e Sistema ---
+python-dotenv>=1.0.1
+packaging>=24.0
+setuptools  # Essencial para o Kivy no Python 3.13
+
+# --- Compilação ---
+# Versão 6.17.0+ tem correções cruciais para o Python 3.13
+pyinstaller>=6.17.0
